@@ -22,6 +22,7 @@ public class GemFactory : MonoBehaviour
     
     private int index;
     private GameObject newGem;
+    public SceneLoader sceneLoader;
     
     // Start is called before the first frame update
     void Start()
@@ -42,16 +43,14 @@ public class GemFactory : MonoBehaviour
             audioSource.clip = destroySound;
             audioSource.Play();
             Destroy(newGem);
-
+            
             if (GameController.points >= GameController.necesaryPoints)
             {
                 GameController.isWin = true;
-                audioSourceWinLose.clip = winSound;
-                audioSourceWinLose.Play();
-                // GameController.points = 0;
-                // GameController.lives = 3;
-                // GameController.enemylives = 3;
-                
+                // audioSourceWinLose.clip = winSound;
+                // audioSourceWinLose.Play();
+                AudioSource.PlayClipAtPoint(winSound, transform.position);
+                Invoke("GameWin", 1f);
             }
             else
             {
@@ -59,6 +58,11 @@ public class GemFactory : MonoBehaviour
             }
             
         }
+    }
+    
+    void GameWin()
+    {
+        sceneLoader.LoadGameWinScene();
     }
 
     void ChangePosition()

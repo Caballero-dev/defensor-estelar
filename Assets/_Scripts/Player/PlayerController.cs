@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioSourceWinLose;
     public AudioClip shootSound;
     public AudioClip asteroidCollisionSound;
+    public AudioClip explosionSound;
     public AudioClip loseSound;
     
     public GameObject effectCollisionPrefab;
     public GameObject effectDestroyPrefab;
+    
+    public SceneLoader sceneLoader;
     
     // Start is called before the first frame update
     void Start()
@@ -36,12 +40,14 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Asteroid")
         {
-            if (GameController.lives <= 0)
+            if (GameController.lives <= 1)
             {
                 CreateEffectDestroy();
                 Destroy(other.gameObject);
-                Destroy(gameObject);
-                
+                Invoke("GameOver", 1f);
+                // isDestroyed = true;
+                GameController.isLose = true;
+                Destroy(gameObject, 1.1f);
 
             } else
             {
@@ -53,23 +59,28 @@ public class PlayerController : MonoBehaviour
         
         if (other.gameObject.tag == "ProjectileEnemy")
         {
-            if (GameController.lives <= 0)
-            {
+            if (GameController.lives <= 1)
+            {   
 
                 CreateEffectDestroy();
                 Destroy(other.gameObject);
-                Destroy(gameObject);
-
+                Invoke("GameOver", 1f);
+                // isDestroyed = true;
+                GameController.isLose = true;
+                Destroy(gameObject, 1.1f);
             } else
             {
-                 
-                
                 CreateEffectCollision();
                 Destroy(other.gameObject);
                 GameController.lives--;
             }
         }
         
+    }
+    
+    void GameOver()
+    {
+        sceneLoader.LoadGameOverScene();
     }
     
     void CreateEffectCollision()
@@ -86,6 +97,9 @@ public class PlayerController : MonoBehaviour
     
     void Mouvement() 
     {
+
+        if (GameController.isLose || GameController.isWin) return;
+        
         float horizontalMovement = Input.GetAxis("Horizontal");
         float verticalMovement = Input.GetAxis("Vertical");
         Vector3 movement = new Vector3(-horizontalMovement, 0, -verticalMovement);
@@ -112,12 +126,13 @@ public class PlayerController : MonoBehaviour
     {
         if (isWinOrLose)
         {
-            audioSourceWinLose.clip = clip;
-            audioSourceWinLose.Play();
+            // audioSourceWinLose.clip = clip;
+            // audioSourceWinLose.Play();
+            AudioSource.PlayClipAtPoint(clip, transform.position);
         }
         else
         {
-            audioSource.clip = clip; 
+            audioSource.clip = clip;
             audioSource.Play();
         } 
     }

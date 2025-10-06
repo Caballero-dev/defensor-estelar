@@ -7,17 +7,17 @@ public class GameController : MonoBehaviour
 {
     public static int necesaryPoints = 3;
     
-    public static int points = 0;
+    public static int points;
     public TMP_Text pointsText;
     
-    public static int lives = 3;
+    public static int lives;
     public TMP_Text livesText;
     
-    public static int enemylives = 3;
+    public static int enemylives;
     public TMP_Text enemylivesText;
     
-    public static bool isWin = false;
-    public static bool isLose = false;
+    public static bool isWin;
+    public static bool isLose;
     
     public Camera mainCamera;
     public Camera secondCamera;
@@ -25,6 +25,13 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        points = 0;
+        lives = 3;
+        enemylives = 3;
+        isWin = false;
+        isLose = false;
+        
+        
         mainCamera.enabled = true;
         secondCamera.enabled = false;
     }

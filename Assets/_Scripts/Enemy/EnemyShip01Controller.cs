@@ -69,7 +69,7 @@ public class EnemyShip01Controller : MonoBehaviour
     {
         if (other.gameObject.tag == "ProjectilePlayer")
         {
-            if (GameController.enemylives <= 0)
+            if (GameController.enemylives <= 1)
             {
                 isDestroyed = true;
                 // oldGameObject = gameObject;
@@ -81,6 +81,7 @@ public class EnemyShip01Controller : MonoBehaviour
                 // Destroy(effect, 5f);
 
                 GameController.lives++;
+                GameController.enemylives = 0;
                 CrateEffectStopShip();
                 // Destroy(gameObject, 1f);
                 // Invoke("ChangePosition", 3f);
@@ -155,7 +156,7 @@ public class EnemyShip01Controller : MonoBehaviour
     void Moviement()
     {
         // Verifica que el jugador aún exista
-        if (player == null || playerObject == null || isDestroyed || GameController.isWin) return;
+        if (player == null || playerObject == null || isDestroyed || GameController.isWin || GameController.isLose) return;
         
         // Almacena las posiciones x y z del jugador
         Vector3 posJugador = new Vector3(player.position.x, transform.position.y, player.position.z);
@@ -167,7 +168,7 @@ public class EnemyShip01Controller : MonoBehaviour
 
     void Shoot()
     {
-        if (player == null || playerObject == null || isDestroyed || GameController.isWin) return;
+        if (player == null || playerObject == null || isDestroyed || GameController.isWin || GameController.isLose) return;
         
         CreateSound(shootSound);
         if (!isMultipleProjectile)
