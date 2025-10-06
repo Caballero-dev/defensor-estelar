@@ -39,10 +39,15 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("WinScene");
     }
 
-    // Esta función cargará la escena de Game Over.
     public void LoadGameOverScene()
     {
         SceneManager.LoadScene("GameOver");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    
     
 }

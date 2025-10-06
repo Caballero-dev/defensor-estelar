@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: 52d643d04b1c2244f8c828db2ee296b7
+  - enabled: 1
+    path: Assets/Scenes/InfoScene.unity
+    guid: 95f5dce1b3a671e489a2fd766f5e78ca
+  - enabled: 1
     path: Assets/Scenes/GameLevel.unity
     guid: 2a1b97e8809b913449d38615f3e59be0
   - enabled: 1
@@ -17,11 +23,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: 49d73cd5a6c723a4fa958dd379a91ea2
-  - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
-    guid: 52d643d04b1c2244f8c828db2ee296b7
-  - enabled: 1
-    path: Assets/Scenes/InfoScene.unity
-    guid: 95f5dce1b3a671e489a2fd766f5e78ca
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
