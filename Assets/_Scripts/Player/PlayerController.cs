@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     // Audio
     public AudioSource audioSource;
     public AudioClip shootSound;
+    public AudioClip asteroidCollisionSound;
+    public AudioClip loseSound;
+    
+    public GameObject effectCollisionPrefab;
+    public GameObject effectDestroyPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -26,24 +31,57 @@ public class PlayerController : MonoBehaviour
         Shoot();
     }
     
-   public void Mouvement() 
-   {
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Asteroid")
+        {
+            if (GameController.lives > 0)
+            {
+                CreateEffectCollision();
+                Destroy(other.gameObject);
+                GameController.lives--;
+            } else
+            {
+                CreateEffectDestroy();
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+            }
+        }
+    }
+    
+    void CreateEffectCollision()
+    {
+        CreateSound(asteroidCollisionSound);
+        Instantiate(effectCollisionPrefab, transform.position, effectCollisionPrefab.transform.rotation);
+    }
+    
+    void CreateEffectDestroy()
+    {
+        CreateSound(loseSound);
+        Instantiate(effectDestroyPrefab, transform.position, effectDestroyPrefab.transform.rotation);
+    }
+    
+    void Mouvement() 
+    {
         float horizontalMovement = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(-horizontalMovement, 0, 0);
-
+        float verticalMovement = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(-horizontalMovement, 0, -verticalMovement);
         transform.Translate(movement.normalized * movementSpeed * Time.deltaTime, Space.World);
-   }
-   
-   public void Shoot()
-   {
+    }
+    void Shoot()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            audioSource.clip = shootSound;
-            audioSource.Play();
+            CreateSound(shootSound);
             Instantiate(projectilePrefab, posProjectileLeft.transform.position, posProjectileLeft.transform.rotation);
             Instantiate(projectilePrefab, posProjectileRight.transform.position, posProjectileRight.transform.rotation);
         }
-   }
-   
+    }
+    
+    void CreateSound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
     
 }

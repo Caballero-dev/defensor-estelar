@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     public float speed;
-
+    
     private GameObject playerObject;
     private Transform player;
     
@@ -21,8 +21,8 @@ public class ProjectileController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovementProjectile();
         DestroyProjectile();
+        MovementProjectile();
     }
 
     void MovementProjectile()
