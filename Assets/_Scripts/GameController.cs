@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static int necesaryPoints = 3;
+    
     public static int points = 0;
     public TMP_Text pointsText;
     
     public static int lives = 3;
     public TMP_Text livesText;
+    
+    public static int enemylives = 3;
+    public TMP_Text enemylivesText;
+    
+    public static bool isWin = false;
+    public static bool isLose = false;
     
     public Camera mainCamera;
     public Camera secondCamera;
@@ -25,6 +33,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         SwitchCamera();
+        UpdateUI();
     }
     
     void SwitchCamera()
@@ -38,8 +47,10 @@ public class GameController : MonoBehaviour
     
     void UpdateUI() 
     {
-        pointsText.text = "Puntos: " + points;
+        pointsText.text = points + " / " + necesaryPoints;
         livesText.text = "Vida: " + lives;
+        
+        enemylivesText.text = "Vida: " + enemylives;
     }
     
 }

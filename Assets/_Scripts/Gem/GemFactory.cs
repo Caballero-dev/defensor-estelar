@@ -16,7 +16,9 @@ public class GemFactory : MonoBehaviour
     public GameObject[] gemPrefabs;
     
     public AudioSource audioSource;
+    public AudioSource audioSourceWinLose;
     public AudioClip destroySound;
+    public AudioClip winSound;
     
     private int index;
     private GameObject newGem;
@@ -36,10 +38,26 @@ public class GemFactory : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && newGem != null)
         {
+            GameController.points++;
             audioSource.clip = destroySound;
             audioSource.Play();
             Destroy(newGem);
-            Invoke("CreateGem", spawnDelay);
+
+            if (GameController.points >= GameController.necesaryPoints)
+            {
+                GameController.isWin = true;
+                audioSourceWinLose.clip = winSound;
+                audioSourceWinLose.Play();
+                // GameController.points = 0;
+                // GameController.lives = 3;
+                // GameController.enemylives = 3;
+                
+            }
+            else
+            {
+                Invoke("CreateGem", spawnDelay);
+            }
+            
         }
     }
 

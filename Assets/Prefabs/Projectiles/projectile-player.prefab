@@ -14658,9 +14658,10 @@ GameObject:
   - component: {fileID: 7427833447211282399}
   - component: {fileID: 4679240440688139029}
   - component: {fileID: 1959415790390770474}
+  - component: {fileID: -6570825034757102976}
   m_Layer: 0
   m_Name: projectile-player
-  m_TagString: Untagged
+  m_TagString: ProjectilePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14746,4 +14747,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  projectileEffect: {fileID: 0}
+  shooterName: PlayerShip
+--- !u!65 &-6570825034757102976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6625072213273115328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9730322, y: 1.9666314, z: 3.6450453}
+  m_Center: {x: 0.0042170584, y: -0.010446042, z: 0.24855703}

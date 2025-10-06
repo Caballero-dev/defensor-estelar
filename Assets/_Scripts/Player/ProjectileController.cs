@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     public float speed;
+    public string shooterName;
     
     private GameObject playerObject;
     private Transform player;
@@ -13,14 +14,24 @@ public class ProjectileController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerObject = GameObject.Find("PlayerShip");
-        player = playerObject.GetComponent<Transform>();
-        
+        playerObject = GameObject.Find(shooterName);
+        // if (playerObject != null)
+        // {
+            player = playerObject.GetComponent<Transform>();
+        // }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // if (playerObject == null)
+        // {
+        //     playerObject = GameObject.Find(shooterName);
+        //     if (playerObject != null)
+        //     {
+        //         player = playerObject.GetComponent<Transform>();
+        //     }
+        // }
         DestroyProjectile();
         MovementProjectile();
     }
@@ -32,7 +43,10 @@ public class ProjectileController : MonoBehaviour
 
     void DestroyProjectile()
     {
-        if (Vector3.Distance(player.position, transform.position) >= 10)
+        if (
+            (player == null || playerObject == null) ||
+            (Vector3.Distance(player.position, transform.position) >= 10)
+            )
         {
             Destroy(gameObject);
         }
